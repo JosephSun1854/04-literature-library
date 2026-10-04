@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="A local-first paper library for social law and AI governance research. Organize original files, inspect metadata and draft review outlines."
+    />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; worker-src 'self' blob:; style-src 'self'; img-src 'self' blob: data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+    />
+    <title>04 · Literature Library — Law × AI</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="library.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">跳至文献库</a>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="https://josephsun1854.github.io/JosephSun1854/"
+          ><span class="brand-mark">L</span>LAW × AI</a
+        >
+        <nav class="suite-nav" aria-label="Research tools">
+          <a href="../01-citation-audit/">01 Citation Audit</a
+          ><a href="../02-evidence-atlas/">02 Evidence Atlas</a
+          ><a href="../03-research-roadmap/">03 Research Roadmap</a
+          ><a href="./" aria-current="page">04 Literature Library</a>
+        </nav>
+        <button id="language" lang="en">English</button>
+      </div>
+    </header>
+    <main id="main" class="app-shell">
+      <div class="hero">
+        <div>
+          <p class="eyebrow">04 / RESEARCH COLLECTION</p>
+          <h1 data-i18n="title">把文献，变成研究线索。</h1>
+          <p data-i18n="subtitle">
+            按期刊、作者、关键词与研究主题整理文献，保留文件原件，逐步搭建你的法学与
+            AI 文献综述。
+          </p>
+        </div>
+        <div class="hero-actions">
+          <span class="badge" data-i18n="local">本地保存 · 无需注册</span
+          ><button id="load-demo" data-i18n="demo">载入虚构示例</button>
+        </div>
+      </div>
+      <div
+        id="storage-error"
+        class="panel error-text"
+        role="alert"
+        hidden
+      ></div>
+      <div class="stats" aria-label="Library summary">
+        <div class="stat">
+          <strong id="stat-total">0</strong
+          ><span data-i18n="papers">篇文献</span>
+        </div>
+        <div class="stat">
+          <strong id="stat-files">0</strong
+          ><span data-i18n="originals">份原件</span>
+        </div>
+        <div class="stat">
+          <strong id="stat-review">0</strong
+          ><span data-i18n="needsReview">待确认元数据</span>
+        </div>
+        <div class="stat">
+          <strong id="stat-size">0 MB</strong
+          ><span data-i18n="storedBytes">本地文件占用</span>
+        </div>
+      </div>
+      <div class="layout">
+        <aside>
+          <section class="panel">
+            <h2 data-i18n="collect">收集文献</h2>
+            <div class="drop-zone" id="drop-zone">
+              <span class="upload-symbol" aria-hidden="true">↥</span>
+              <p data-i18n="drop">拖入文件，开始归档</p>
+              <label
+                class="primary file-button"
+                for="file-import"
+                data-i18n="choose"
+                >选择文件</label
+              ><input
+                id="file-import"
+                class="sr-only"
+                type="file"
+                multiple
+                accept=".pdf,.txt,.md,.bib,.ris"
+              /><small>PDF · TXT · MD · BibTeX · RIS</small>
+            </div>
+            <p class="note" data-i18n="candidateNotice">
+              提取结果为候选信息，请与原文核对。扫描 PDF 暂不支持
+              OCR；书目导入不含论文原件。
+            </p>
+            <button id="add-record" class="wide" data-i18n="addRecord">
+              ＋ 手工添加文献
+            </button>
+          </section>
+          <section class="panel">
+            <h3 data-i18n="backupTitle">备份与迁移</h3>
+            <p class="note" data-i18n="backupNotice">
+              原件仅保存在当前浏览器；清理网站数据会删除文献库。请定期导出完整
+              ZIP 备份。
+            </p>
+            <div class="stack-actions">
+              <button id="backup" data-i18n="backup">导出完整备份 ZIP</button
+              ><button id="metadata-export" data-i18n="metadataExport">
+                导出元数据 JSON</button
+              ><label class="file-button" for="restore" data-i18n="restore"
+                >导入备份 / 元数据</label
+              ><input
+                id="restore"
+                type="file"
+                class="sr-only"
+                accept=".zip,.json"
+              /><button id="persistent" data-i18n="persist">
+                申请持久保存
+              </button>
+            </div>
+            <p id="storage-estimate" class="note"></p>
+          </section>
+          <section class="panel">
+            <h3 data-i18n="method">研究方法</h3>
+            <p class="note" data-i18n="methodNotice">
+              围绕社会法、算法管理与大模型规制构建文献脉络。分类与摘要帮助定位材料，研究判断仍需阅读全文。
+            </p>
+            <a
+              class="note"
+              href="https://github.com/JosephSun1854/04-literature-library#methods"
+              target="_blank"
+              rel="noopener"
+              data-i18n="methodLink"
+              >阅读方法与边界 ↗</a
+            >
+          </section>
+        </aside>
+        <section class="collection" aria-label="Paper collection">
+          <div class="panel search-panel">
+            <div class="section-head">
+              <h2 data-i18n="browse">文献切片</h2>
+              <span id="result-count" class="note"></span>
+            </div>
+            <label class="sr-only" for="search" data-i18n="searchLabel"
+              >搜索文献</label
+            ><input
+              id="search"
+              type="search"
+              placeholder="搜索标题、作者、摘要、关键词或全文"
+              data-placeholder="searchPlaceholder"
+            />
+            <div class="filter-grid">
+              <div>
+                <label for="filter-theme" data-i18n="theme">研究主题</label
+                ><select id="filter-theme"></select>
+              </div>
+              <div>
+                <label for="filter-journal" data-i18n="journal"
+                  >期刊 / 来源</label
+                ><select id="filter-journal"></select>
+              </div>
+              <div>
+                <label for="filter-author" data-i18n="authors">作者</label
+                ><select id="filter-author"></select>
+              </div>
+              <div>
+                <label for="filter-year" data-i18n="year">年份</label
+                ><select id="filter-year"></select>
+              </div>
+              <div>
+                <label for="filter-keyword" data-i18n="keywords">关键词</label
+                ><select id="filter-keyword"></select>
+              </div>
+              <div>
+                <label for="filter-status" data-i18n="verification"
+                  >确认状态</label
+                ><select id="filter-status">
+                  <option value="" data-i18n="all">全部</option>
+                  <option value="review" data-i18n="needsReview">
+                    待确认元数据
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="actions">
+              <label class="inline-label" for="group-by" data-i18n="groupBy"
+                >分组</label
+              ><select id="group-by" class="compact-select">
+                <option value="theme" data-i18n="theme">研究主题</option>
+                <option value="journal" data-i18n="journal">期刊 / 来源</option>
+                <option value="authors" data-i18n="authors">作者</option>
+                <option value="keywords" data-i18n="keywords">关键词</option>
+                <option value="year" data-i18n="year">年份</option></select
+              ><button id="reset" data-i18n="reset">清除筛选</button>
+            </div>
+          </div>
+          <div class="selection-bar">
+            <label class="inline-label"
+              ><input type="checkbox" id="select-all" /><span
+                data-i18n="selectVisible"
+                >选择筛选结果</span
+              ></label
+            ><span id="selection-count" class="note"></span>
+            <div class="actions">
+              <button id="outline" data-i18n="outline">综述提纲 ↓</button
+              ><button id="archive" data-i18n="archive">分类原件 ZIP ↓</button
+              ><button id="reading-list" data-i18n="readingList">
+                阅读清单 ↓
+              </button>
+            </div>
+          </div>
+          <div id="results"></div>
+        </section>
+      </div>
+    </main>
+    <footer class="footer">
+      <span>LAW × AI · Literature Library</span
+      ><span data-i18n="footer">本地处理 · 保留出处 · 人工核验</span>
+    </footer>
+    <div
+      id="status"
+      class="status-bar"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
+    <dialog id="editor">
+      <div class="dialog-head">
+        <h2 data-i18n="edit">文献详情</h2>
+        <button type="button" data-close="editor" aria-label="Close / 关闭">
+          ×
+        </button>
+      </div>
+      <p id="editor-info" class="note"></p>
+      <form id="editor-form">
+        <div class="field">
+          <label for="edit-title" data-i18n="paperTitle">论文题名</label
+          ><input id="edit-title" name="title" required maxlength="3000" />
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="edit-authors" data-i18n="authors">作者</label
+            ><input
+              id="edit-authors"
+              name="authors"
+              placeholder="分号分隔 / Separate with semicolons"
+            />
+          </div>
+          <div class="field">
+            <label for="edit-journal" data-i18n="journal">期刊 / 来源</label
+            ><input id="edit-journal" name="journal" />
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="edit-year" data-i18n="year">年份</label
+            ><input
+              id="edit-year"
+              name="year"
+              inputmode="numeric"
+              pattern="(1[4-9][0-9]{2}|20[0-9]{2}|21[0-9]{2})"
+              maxlength="4"
+            />
+          </div>
+          <div class="field">
+            <label for="edit-doi">DOI</label><input id="edit-doi" name="doi" />
+          </div>
+        </div>
+        <div class="field">
+          <label for="edit-sourceUrl" data-i18n="sourceUrl">来源链接</label
+          ><input
+            id="edit-sourceUrl"
+            name="sourceUrl"
+            type="url"
+            pattern="https?://.+"
+            placeholder="https://..."
+          />
+        </div>
+        <div class="field">
+          <label for="edit-keywords" data-i18n="keywords">关键词</label
+          ><input
+            id="edit-keywords"
+            name="keywords"
+            placeholder="分号分隔 / Separate with semicolons"
+          />
+        </div>
+        <div class="field">
+          <label for="edit-theme" data-i18n="theme">研究主题</label
+          ><input id="edit-theme" name="theme" list="theme-list" /><datalist
+            id="theme-list"
+          >
+            <option>LLM governance / 大模型治理</option>
+            <option>Labor &amp; platforms / 劳动与平台</option>
+            <option>Social protection / 社会保障</option>
+            <option>Data &amp; privacy / 数据与隐私</option>
+            <option>Accountability / 问责与救济</option>
+          </datalist>
+        </div>
+        <div class="field">
+          <label for="edit-abstract" data-i18n="abstract">摘要</label
+          ><textarea
+            id="edit-abstract"
+            name="abstract"
+            rows="5"
+            maxlength="30000"
+          ></textarea>
+        </div>
+        <div class="field">
+          <label for="edit-notes" data-i18n="notes">阅读笔记 / 研究问题</label
+          ><textarea
+            id="edit-notes"
+            name="notes"
+            rows="3"
+            maxlength="30000"
+          ></textarea>
+        </div>
+        <div class="field">
+          <label class="inline-label"
+            ><input name="verified" type="checkbox" /><span
+              data-i18n="confirmMetadata"
+              >我已与原文核对并确认这些元数据</span
+            ></label
+          >
+        </div>
+        <p id="editor-error" class="error-text" role="alert"></p>
+        <div class="actions">
+          <button type="submit" class="primary" data-i18n="save">
+            保存文献</button
+          ><button type="button" id="read-original" data-i18n="read">
+            阅读原件</button
+          ><button type="button" id="download-original" data-i18n="download">
+            下载原件</button
+          ><button
+            type="button"
+            id="delete-record"
+            class="danger"
+            data-i18n="delete"
+          >
+            删除文献
+          </button>
+        </div>
+        <hr />
+        <label class="file-button" for="attach-import" data-i18n="attachFile"
+          >保存并附加 / 替换原件</label
+        ><input
+          id="attach-import"
+          type="file"
+          class="sr-only"
+          accept=".pdf,.txt,.md"
+        />
+        <p class="note" data-i18n="attachNotice">
+          将原件关联到当前书目；已有元数据保留，空缺项填入提取候选，确认状态重置。替换前请备份原件。
+        </p>
+      </form>
+    </dialog>
+    <dialog id="reader">
+      <div class="dialog-head">
+        <h2 data-i18n="reader">原文阅读</h2>
+        <button type="button" data-close="reader" aria-label="Close / 关闭">
+          ×
+        </button>
+      </div>
+      <p id="reader-title"></p>
+      <div id="pdf-toolbar" class="actions" hidden>
+        <button id="previous-page" data-i18n="previous">上一页</button
+        ><span id="page-label"></span
+        ><button id="next-page" data-i18n="next">下一页</button>
+      </div>
+      <p id="reader-status" role="status"></p>
+      <canvas id="pdf-canvas" hidden></canvas>
+      <pre id="text-preview" hidden></pre>
+    </dialog>
+    <dialog id="confirm-dialog">
+      <div class="dialog-head"><h2 id="confirm-heading"></h2></div>
+      <p id="confirm-message"></p>
+      <div class="actions">
+        <button id="confirm-action" class="primary" data-i18n="confirm">
+          确认</button
+        ><button id="confirm-cancel" data-i18n="cancel">取消</button>
+      </div>
+    </dialog>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

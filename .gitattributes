@@ -1,0 +1,6 @@
+* text=auto eol=lf
+*.png binary
+*.wasm binary
+*.bcmap binary
+*.ttf binary
+*.pfb binary

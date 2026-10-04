@@ -1,0 +1,13 @@
+{
+  "name": "04-literature-library",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Local-first paper library for social law and AI governance research",
+  "scripts": {
+    "test": "node --test",
+    "start": "node scripts/serve.mjs",
+    "check": "node --check app.js && node --check core.js && node --check storage.js && node --check archives.js"
+  },
+  "license": "MIT"
+}

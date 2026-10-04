@@ -1,0 +1,6 @@
+{
+  "pdfjs": "6.4.299",
+  "pdfjsTar": "https://registry.npmjs.org/pdfjs-dist/-/pdfjs-dist-6.4.299.tgz",
+  "fflate": "0.8.3",
+  "fflateTar": "https://registry.npmjs.org/fflate/-/fflate-0.8.3.tgz"
+}

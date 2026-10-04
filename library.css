@@ -1,0 +1,249 @@
+.collection {
+  min-width: 0;
+}
+.drop-zone {
+  text-align: center;
+  border: 1px dashed #9db7a8;
+  border-radius: 12px;
+  padding: 18px 10px;
+  background: #f1f5ec;
+}
+.drop-zone.dragging {
+  outline: 3px solid var(--gold);
+}
+.drop-zone p {
+  margin-bottom: 10px;
+}
+.upload-symbol {
+  font-size: 2rem;
+  color: var(--accent);
+}
+.file-button {
+  display: block;
+  text-align: center;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 0.65rem 0.8rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.file-button:hover {
+  background: var(--accent-soft);
+}
+.file-button.primary {
+  margin-bottom: 12px;
+}
+.file-button.primary:hover {
+  background: var(--ink);
+}
+.drop-zone small {
+  font-size: 0.7rem;
+}
+.wide {
+  width: 100%;
+}
+.stack-actions {
+  display: grid;
+  gap: 8px;
+}
+.filter-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+.filter-grid label {
+  font-size: 0.74rem;
+}
+.inline-label {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin: 0;
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+.compact-select {
+  width: auto;
+  max-width: 200px;
+}
+.selection-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 0;
+}
+.selection-bar button {
+  font-size: 0.75rem;
+  padding: 0.5rem 0.7rem;
+}
+.paper-group {
+  margin-bottom: 24px;
+}
+.group-heading {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+}
+.paper-card {
+  position: relative;
+  margin-bottom: 12px;
+  padding: 20px;
+}
+.paper-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.paper-heading h3 {
+  font-size: 1.05rem;
+  line-height: 1.5;
+  margin: 0 0 6px;
+}
+.paper-heading input {
+  margin-top: 7px;
+}
+.title-button {
+  border: 0;
+  padding: 0;
+  text-align: left;
+  background: transparent;
+  font-weight: 600;
+  line-height: 1.5;
+  border-radius: 2px;
+}
+.title-button:hover {
+  background: transparent;
+  color: var(--accent);
+  text-decoration: underline;
+}
+.paper-source {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+.paper-abstract {
+  font-size: 0.86rem;
+  line-height: 1.75;
+  margin: 12px 0;
+  color: #46605a;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.paper-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+}
+.paper-bottom button {
+  font-size: 0.75rem;
+  padding: 0.4rem 0.65rem;
+}
+.paper-labels {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.missing-notice {
+  margin: 10px 0 0;
+  font-size: 0.72rem;
+  color: #87642d;
+}
+.search-panel h2 {
+  font-size: 1.45rem;
+}
+.empty-symbol {
+  font-size: 2.2rem;
+  color: #78938b;
+  margin: 0 0 10px;
+}
+#reader {
+  width: min(900px, calc(100vw - 32px));
+}
+#pdf-canvas {
+  max-width: 100%;
+  display: block;
+  margin: 20px auto;
+  border: 1px solid var(--line);
+}
+#text-preview {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  max-height: 60vh;
+  background: var(--paper);
+}
+#storage-error {
+  margin-bottom: 20px;
+}
+.note a {
+  color: inherit;
+}
+.busy {
+  cursor: progress;
+}
+.busy button {
+  cursor: progress;
+}
+#storage-estimate {
+  margin-top: 12px;
+  margin-bottom: 0;
+}
+.dialog-head button {
+  font-size: 1.4rem;
+  padding: 0.1rem 0.6rem;
+}
+#confirm-dialog {
+  max-width: 480px;
+}
+.paper-tags {
+  margin-top: 10px;
+}
+.paper-tags .tag {
+  background: transparent;
+}
+#editor-info {
+  padding: 10px;
+  background: var(--accent-soft);
+  border-radius: 8px;
+}
+@media (max-width: 1100px) {
+  .filter-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .selection-bar {
+    justify-content: flex-start;
+  }
+}
+@media (max-width: 720px) {
+  .paper-bottom {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .selection-bar .actions {
+    width: 100%;
+  }
+  .filter-grid {
+    gap: 10px;
+  }
+  .paper-card {
+    padding: 16px;
+  }
+  .compact-select {
+    max-width: 160px;
+  }
+  .group-heading {
+    font-size: 1rem;
+  }
+  .stats .stat strong {
+    font-size: 1.4rem;
+  }
+}
