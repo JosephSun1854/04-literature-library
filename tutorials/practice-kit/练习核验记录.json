@@ -1,0 +1,24 @@
+{
+  "checked": "2026-10-04",
+  "method": "现有核心函数与固定教学材料的实际运行；未验证网页上传流程。",
+  "files": 5,
+  "authors": 6,
+  "journals": 3,
+  "year": "2026",
+  "searchArtificialReview": [
+    "S01",
+    "S02",
+    "S04"
+  ],
+  "searchQuote": [
+    "S05"
+  ],
+  "searchNone": [],
+  "manualTheme": [
+    "S01",
+    "S04"
+  ],
+  "allCandidateMetadataUnverified": true,
+  "automaticSyntheticBadge": false,
+  "exactP2Matches": 5
+}

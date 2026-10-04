@@ -30,6 +30,8 @@ Open the [hosted app](https://josephsun1854.github.io/04-literature-library/) in
 
 The library initially contains **no papers**. “Load synthetic examples” adds two explicitly fictional educational records, with no original files, real authors or asserted research results.
 
+For a small guided exercise, use the [free five-document practice kit / 免费五份材料练习包](tutorials/README.md) or [download its ZIP](https://josephsun1854.github.io/04-literature-library/tutorials/05-practice-kit.zip). All teaching documents are explicitly fictional; keep their labels and do not cite them as real papers. The kit includes original Markdown files, external worksheets and checked output examples, with the original kit README preserved.
+
 For local use, install Node.js 22 or later and run:
 
 ```sh
